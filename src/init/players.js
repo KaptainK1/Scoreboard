@@ -2,13 +2,23 @@ const players = [
 
     {
         id:1,
-        name: "Dylan",
-        score: 6
+        name: "Dylan"
     },
     {
         id:2,
-        name: "Katrina",
-        score:4
+        name: "Katrina"
+    },
+    {
+        id:3,
+        name:"Ares"
+    },
+    {
+        id:4,
+        name:"Daisy"
+    },
+    {
+        id:5,
+        name:"Lily"
     }
 
 ];

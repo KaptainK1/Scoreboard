@@ -14,15 +14,20 @@ class Counter extends React.Component {
         this.decrementScore = this.decrementScore.bind(this);
     }
 
+    //use callback function with set state for more accuracy --recommended
     incrementScore() {
-        this.setState({
-            score: this.state.score +1
+        this.setState( prevState => {
+            return {
+                score: prevState.score + 1
+            };
         });
     }
 
     decrementScore() {
-        this.setState({
-            score: this.state.score -1
+        this.setState( prevState => {
+            return {
+                score: prevState.score -1
+            };
         });
     }
 
