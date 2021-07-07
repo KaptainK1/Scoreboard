@@ -2,45 +2,45 @@ import React from 'react';
 
 //use classes when managing State
 //use functions when a component is only receiving input through props and rendering UI
-class Counter extends React.Component {
+function Counter(props) {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            score: 0
-        };
-        //bind function to individual objects
-        this.incrementScore = this.incrementScore.bind(this);
-        this.decrementScore = this.decrementScore.bind(this);
-    }
+    // constructor(props){
+    //     super(props);
+        ////bind function to individual objects
+    //     this.incrementScore = this.incrementScore.bind(this);
+    //     this.decrementScore = this.decrementScore.bind(this);
+    // }
 
     //use callback function with set state for more accuracy --recommended
-    incrementScore() {
-        this.setState( prevState => {
-            return {
-                score: prevState.score + 1
-            };
-        });
-    }
+        //implemented in app component now
+    // incrementScore() {
+    //     this.setState( prevState => {
+    //         return {
+    //             score: prevState.score + 1
+    //         };
+    //     });
+    // }
+    //
+    // decrementScore() {
+    //     this.setState( prevState => {
+    //         return {
+    //             score: prevState.score -1
+    //         };
+    //     });
+    // }
 
-    decrementScore() {
-        this.setState( prevState => {
-            return {
-                score: prevState.score -1
-            };
-        });
-    }
+        let index = props.index;
 
-    render (){
         return(
             <div className='counter'>
-                <button className="counter-action decrement" onClick={ this.decrementScore }> - </button>
+                {/*<button className="counter-action decrement" onClick={ this.decrementScore }> - </button>*/}
+                <button className="counter-action decrement" onClick={() => props.changeScore(index, -1)}> - </button>
                 {/*//"this" refer to the Component instance*/}
-                <span className='counter-score'>{this.state.score}</span>
-                <button className="counter-action increment" onClick={this.incrementScore}> + </button>
+                <span className='counter-score'>{props.score}</span>
+                {/*<button className="counter-action increment" onClick={this.incrementScore}> + </button>*/}
+                <button className="counter-action increment" onClick={() => props.changeScore(index, 1)}> + </button>
             </div>
         );
-    }
 }
 
 export default Counter;
