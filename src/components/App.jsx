@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header.jsx';
 import Player from './Player.jsx';
 import players from '../init/players';
+import AddPlayerForm from "./AddPlayerForm";
 
 class App extends React.Component {
 
@@ -12,6 +13,7 @@ class App extends React.Component {
         }
         this.handleRemovePlayer= this.handleRemovePlayer.bind(this);
         this.handleScoreChanged=this.handleScoreChanged.bind(this);
+        this.handleAddPlayer=this.handleAddPlayer.bind(this);
     }
 
     //this function will be called at the child Player component level
@@ -47,10 +49,26 @@ class App extends React.Component {
 
     }
 
+    prevPlayerID = 6;
+    handleAddPlayer(name){
+        this.setState({
+            playerList: [
+                //use spread operator to bring in entire player list as individual components
+                //then we are adding our new player to it
+                ...this.state.playerList,
+                {
+                name,
+                score: 0,
+                id: this.prevPlayerID += 1
+
+            }]
+        });
+    }
+
     render() {
         return (
             <div className="scoreboard">
-                <Header title="Scoreboard" totalPlayers={this.state.playerList.length}/>
+                <Header title="Scoreboard" players={this.state.playerList}/>
                 {this.state.playerList.map( (p, index) =>
                     <Player key={p.id.toString()}
                             score={p.score}
@@ -62,6 +80,7 @@ class App extends React.Component {
                             //pass the function handleScoreChanged down to the counter component
                             changeScore={this.handleScoreChanged}
                     />)}
+                <AddPlayerForm addPlayer={this.handleAddPlayer}/>
             </div>
         );
     }
