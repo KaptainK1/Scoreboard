@@ -51,17 +51,19 @@ class App extends React.Component {
 
     prevPlayerID = 6;
     handleAddPlayer(name){
-        this.setState({
-            playerList: [
-                //use spread operator to bring in entire player list as individual components
-                //then we are adding our new player to it
-                ...this.state.playerList,
-                {
-                name,
-                score: 0,
-                id: this.prevPlayerID += 1
+        this.setState( prevState => {
+            return {
+                playerList: [
+                    //use spread operator to bring in entire player list as individual components
+                    //then we are adding our new player to it
+                    ...prevState.playerList,
+                    {
+                        name,
+                        score: 0,
+                        id: this.prevPlayerID += 1
 
-            }]
+                    }]
+            };
         });
     }
 
