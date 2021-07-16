@@ -6,14 +6,19 @@ class AddPlayerForm extends React.Component{
         value:''
     };
 
-    handleValueChanged = (e) => {
-        this.setState({value: e.target.value});
-    }
+    playerInput = React.createRef();
+
+    //use commented out lines to handle updates for user input
+    // handleValueChanged = (e) => {
+    //     this.setState({value: e.target.value});
+    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addPlayer(this.state.value);
-        this.setState({value: ''});
+        // this.props.addPlayer(this.state.value);
+        this.props.addPlayer(this.playerInput.current.value)
+        // this.setState({value: ''});
+        e.currentTarget.reset();
     }
 
     render(){
@@ -22,8 +27,9 @@ class AddPlayerForm extends React.Component{
             <form onSubmit={this.handleSubmit}>
                 <input
                     type="text"
-                    value={this.state.value}
-                    onChange={this.handleValueChanged}
+                    ref={this.playerInput}
+                    // value={this.state.value}
+                    // onChange={this.handleValueChanged}
                     placeholder="Enter a player's name"
                 />
                 <input
@@ -33,8 +39,6 @@ class AddPlayerForm extends React.Component{
             </form>
         );
     }
-
-
 }
 
 export default AddPlayerForm;

@@ -2,7 +2,7 @@ import React from 'react';
 
 //use classes when managing State
 //use functions when a component is only receiving input through props and rendering UI
-function Counter(props) {
+function Counter({index, changeScore, score}) {
 
     // constructor(props){
     //     super(props);
@@ -29,16 +29,16 @@ function Counter(props) {
     //     });
     // }
 
-        let index = props.index;
+        // let index = props.index;
 
         return(
             <div className='counter'>
                 {/*<button className="counter-action decrement" onClick={ this.decrementScore }> - </button>*/}
-                <button className="counter-action decrement" onClick={() => props.changeScore(index, -1)}> - </button>
+                <button className="counter-action decrement" onClick={() => changeScore(index, -1)}> - </button>
                 {/*//"this" refer to the Component instance*/}
-                <span className='counter-score'>{props.score}</span>
+                <span className='counter-score'>{score}</span>
                 {/*<button className="counter-action increment" onClick={this.incrementScore}> + </button>*/}
-                <button className="counter-action increment" onClick={() => props.changeScore(index, 1)}> + </button>
+                <button className="counter-action increment" onClick={() => changeScore(index, 1)}> + </button>
             </div>
         );
 }
