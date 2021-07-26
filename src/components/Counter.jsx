@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 //use classes when managing State
 //use functions when a component is only receiving input through props and rendering UI
@@ -41,6 +42,12 @@ function Counter({index, changeScore, score}) {
                 <button className="counter-action increment" onClick={() => changeScore(index, 1)}> + </button>
             </div>
         );
+}
+
+Counter.propTypes = {
+        index: PropTypes.number,
+        score: PropTypes.number,
+        changeScore: PropTypes.func
 }
 
 export default Counter;

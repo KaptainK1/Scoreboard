@@ -38,6 +38,15 @@ class App extends React.Component {
 
             // Update the target player's score
             updatedPlayer.score += delta;
+
+            // for (let i = 0; i < updatedPlayers.length; i++) {
+            //     if (updatedPlayer.score >= updatedPlayers[i].score){
+            //         updatedPlayer.isHighestScore = true;
+            //     } else {
+            //         updatedPlayer.isHighestScore = false;
+            //     }
+            // }
+
             // Update the 'players' array with the target player's latest score
             updatedPlayers[index] = updatedPlayer;
 
@@ -47,6 +56,15 @@ class App extends React.Component {
             };
         });
 
+    }
+
+    getHighScore = () => {
+        const scores = this.state.playerList.map( p => p.score );
+        const highScore = Math.max(...scores);
+        if (highScore) {
+            return highScore;
+        }
+        return null;
     }
 
     prevPlayerID = 6;
@@ -68,6 +86,7 @@ class App extends React.Component {
     }
 
     render() {
+        const highScore = this.getHighScore();
         return (
             <div className="scoreboard">
                 <Header title="Scoreboard" players={this.state.playerList}/>
@@ -81,6 +100,7 @@ class App extends React.Component {
                             removePlayer={this.handleRemovePlayer}
                             //pass the function handleScoreChanged down to the counter component
                             changeScore={this.handleScoreChanged}
+                            isHighestScore={highScore === p.score}
                     />)}
                 <AddPlayerForm addPlayer={this.handleAddPlayer}/>
             </div>
