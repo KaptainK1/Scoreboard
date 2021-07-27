@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Stats from './Stats.jsx';
 import Stopwatch from "./Stopwatch";
 
-function Header({players, title}) {
+function Header({title}) {
     return (
         <header>
-            <Stats players={players}/>
+            <Stats />
             <h1>{title}</h1>
             <Stopwatch />
         </header>
@@ -16,7 +16,6 @@ function Header({players, title}) {
 //validate the Header component receives players as an array of objects
 //and a title as a string from props.
 Header.propTypes = {
-    players: PropTypes.arrayOf(PropTypes.object),
     title: PropTypes.string
 }
 

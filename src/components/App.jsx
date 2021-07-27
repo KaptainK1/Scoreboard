@@ -3,6 +3,7 @@ import Header from './Header.jsx';
 import Player from './Player.jsx';
 import players from '../init/players';
 import AddPlayerForm from "./AddPlayerForm";
+import {Provider} from "./context";
 
 class App extends React.Component {
 
@@ -39,14 +40,6 @@ class App extends React.Component {
             // Update the target player's score
             updatedPlayer.score += delta;
 
-            // for (let i = 0; i < updatedPlayers.length; i++) {
-            //     if (updatedPlayer.score >= updatedPlayers[i].score){
-            //         updatedPlayer.isHighestScore = true;
-            //     } else {
-            //         updatedPlayer.isHighestScore = false;
-            //     }
-            // }
-
             // Update the 'players' array with the target player's latest score
             updatedPlayers[index] = updatedPlayer;
 
@@ -60,8 +53,10 @@ class App extends React.Component {
 
     getHighScore = () => {
         const scores = this.state.playerList.map( p => p.score );
+        console.log("scores: " + scores);
         const highScore = Math.max(...scores);
         if (highScore) {
+            console.log("HIgh score: " + highScore);
             return highScore;
         }
         return null;
@@ -87,23 +82,26 @@ class App extends React.Component {
 
     render() {
         const highScore = this.getHighScore();
+        console.log("render high score: " + highScore);
         return (
-            <div className="scoreboard">
-                <Header title="Scoreboard" players={this.state.playerList}/>
-                {this.state.playerList.map( (p, index) =>
-                    <Player key={p.id.toString()}
-                            score={p.score}
-                            name={p.name}
-                            id={p.id}
-                            index={index}
-                            //pass the function handleRemovePlayer down to the counter component
-                            removePlayer={this.handleRemovePlayer}
-                            //pass the function handleScoreChanged down to the counter component
-                            changeScore={this.handleScoreChanged}
-                            isHighestScore={highScore === p.score}
-                    />)}
-                <AddPlayerForm addPlayer={this.handleAddPlayer}/>
-            </div>
+            <Provider value={this.state.playerList}>
+                <div className="scoreboard">
+                    <Header title="Scoreboard"/>
+                    {this.state.playerList.map( (p, index) =>
+                        <Player key={p.id.toString()}
+                                score={p.score}
+                                name={p.name}
+                                id={p.id}
+                                index={index}
+                                //pass the function handleRemovePlayer down to the counter component
+                                removePlayer={this.handleRemovePlayer}
+                                //pass the function handleScoreChanged down to the counter component
+                                changeScore={this.handleScoreChanged}
+                                isHighestScore={highScore === p.score}
+                        />)}
+                    <AddPlayerForm addPlayer={this.handleAddPlayer}/>
+                </div>
+            </Provider>
         );
     }
 }
