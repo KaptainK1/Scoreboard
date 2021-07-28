@@ -84,7 +84,12 @@ class App extends React.Component {
         const highScore = this.getHighScore();
         console.log("render high score: " + highScore);
         return (
-            <Provider value={this.state.playerList}>
+            <Provider value={{
+                players: this.state.playerList,
+                actions: {
+                    changeScore: this.handleScoreChanged
+                }
+            }}>
                 <div className="scoreboard">
                     <Header title="Scoreboard"/>
                     {this.state.playerList.map( (p, index) =>
@@ -96,7 +101,7 @@ class App extends React.Component {
                                 //pass the function handleRemovePlayer down to the counter component
                                 removePlayer={this.handleRemovePlayer}
                                 //pass the function handleScoreChanged down to the counter component
-                                changeScore={this.handleScoreChanged}
+                                // changeScore={this.handleScoreChanged}
                                 isHighestScore={highScore === p.score}
                         />)}
                     <AddPlayerForm addPlayer={this.handleAddPlayer}/>

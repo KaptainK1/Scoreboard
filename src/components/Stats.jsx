@@ -7,9 +7,9 @@ function Stats() {
         <Consumer>
             {context => {
 
-                const playerTotal = context.length;
+                const playerTotal = context.players.length;
 
-                const totalScore = context.reduce( (total, player) => {
+                const totalScore = context.players.reduce( (total, player) => {
                     return total + player.score;
                 }, 0);
 

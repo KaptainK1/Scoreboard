@@ -7,7 +7,6 @@ import Icon from './Icon.jsx';
 class Player extends React.PureComponent {
 
     static propTypes = {
-        changeScore: PropTypes.func.isRequired,
         removePlayer: PropTypes.func.isRequired,
         name: PropTypes.string.isRequired,
         score: PropTypes.number.isRequired,
@@ -17,7 +16,7 @@ class Player extends React.PureComponent {
     }
 
     render() {
-        const { name, id, score, index, removePlayer, changeScore, isHighestScore} = this.props;
+        const { name, id, score, index, removePlayer, isHighestScore} = this.props;
         return (
             <div className="player">
                 <span className="player-name">
@@ -27,7 +26,7 @@ class Player extends React.PureComponent {
                 </span>
                     <Counter
                         score={score}
-                        changeScore={changeScore}
+                        // changeScore={changeScore}
                         index={index}/>
             </div>
         );
